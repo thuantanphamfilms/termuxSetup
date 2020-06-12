@@ -212,7 +212,6 @@ function gha --description "git push all project"
 end
 
 alias gldotfiles='cd ~/git/dotfiles ; pull ; cd -'
-alias gldotfiles='cd ~/git/termuxSetup ; pull ; cd -'
 alias gllazyscript='cd ~/git/lazyscript ; pull ; cd -'
 alias gllinux_setup='cd ~/git/linux_setup ; pull ; cd -'
 alias glvimium_dark_theme='cd ~/git/vimium_dark_theme ; pull ; cd -'
