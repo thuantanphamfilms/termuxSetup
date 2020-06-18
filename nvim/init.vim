@@ -8,6 +8,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim'
 Plug 'mbbill/undotree'
+Plug 'maxboisvert/vim-simple-complete/'
 " fancy
 Plug 'ap/vim-css-color'
 Plug 'NLKNguyen/papercolor-theme'
