@@ -1,6 +1,8 @@
 # termux setup
 
-# termuxSetup
+## Note
+
+- I use Crontab + auto commit script (used API whatthecommit.com), so my commit just auto sync, => sorry I'm so lazy to commit :D
 
 ## Q & A
 
