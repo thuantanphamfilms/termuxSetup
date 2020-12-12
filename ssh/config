@@ -1,4 +1,3 @@
-# Host pc
-# Hostname 19.33??
-# user master
-# port 2244
+Host github.com
+    Hostname ssh.github.com
+    Port 443

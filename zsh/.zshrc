@@ -242,7 +242,7 @@ alias prettier='prettier --write .'
 alias ok='yo ; push'
 alias okp='prettier ; yo ; push '
 
-ghtermux () {
+ghtermuxSetup () {
     cp ~/.config/tmux/.tmux.conf ~/git/termuxSetup/tmux/
     cp ~/.config/zsh/.zshrc ~/git/termuxSetup/zsh/
     cp -r ~/.config/zsh/functions/* ~/git/termuxSetup/zsh/functions/
