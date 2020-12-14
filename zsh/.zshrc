@@ -237,7 +237,7 @@ alias okp='prettier ; yo ; push '
 ghtermuxSetup () {
     cp ~/.config/tmux/.tmux.conf ~/git/termuxSetup/tmux/
     cp ~/.config/zsh/.zshrc ~/git/termuxSetup/zsh/
-    cp -r ~/.config/zsh/functions/* ~/git/termuxSetup/zsh/functions/
+    cp -r ~/.config/zsh/functions ~/git/termuxSetup/zsh
     cp ~/.config/nvim/coc-settings.json ~/git/termuxSetup/nvim/
     cp ~/.config/nvim/init.vim ~/git/termuxSetup/nvim/
     cp -r ~/.config/nvim/coc-settings.json ~/git/termuxSetup/nvim/
