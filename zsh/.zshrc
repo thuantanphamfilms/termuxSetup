@@ -17,7 +17,6 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
 
 PROMPT=" %F{blue}%~%f %F{red}❯%f%F{yellow}❯%f%F{green}❯%f "
-# PROMPT=" %F{blue}%~%f 👉 "
 
 setopt histignorealldups sharehistory
 
@@ -176,6 +175,7 @@ alias o='xdg-open'
 alias 777='chmod -R 777'
 alias x='chmod +x'
 alias f='fd . -H | grep --colour=always'
+alias n='nnn -de'
 
 # alias ins='sudo dnf install -y'
 # alias uins='sudo dnf remove -y'

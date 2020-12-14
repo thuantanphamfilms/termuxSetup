@@ -2,14 +2,6 @@ call plug#begin()
 Plug 'preservim/tagbar'
 nmap <leader>t :TagbarToggle<CR>
 
-" color select/picker
-" use <Alt>+<r>
-Plug 'KabbAmine/vCoolor.vim'
-
-Plug 'junegunn/vim-easy-align'
-vmap <Enter> <Plug>(EasyAlign)
-nmap <Enter> <Plug>(EasyAlign)
-
 Plug 'rhysd/clever-f.vim'
 Plug 'easymotion/vim-easymotion'
 nmap ;; <Plug>(easymotion-overwin-f)
