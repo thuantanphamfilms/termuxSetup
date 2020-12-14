@@ -177,20 +177,12 @@ alias 777='chmod -R 777'
 alias x='chmod +x'
 alias f='fd . -H | grep --colour=always'
 
-# music stuff
-# alias m='tmux new-window ; mpv --shuffle ~/Music/*'
-alias m='mpv --audio-display=no --shuffle ~/Music/*'
-
-# alias ins='sudo apt install -y'
-# alias uins='sudo apt remove -y'
-
-# fedora dnf
 # alias ins='sudo dnf install -y'
 # alias uins='sudo dnf remove -y'
 
 # arch
-alias ins='sudo pacman -S --noconfirm'
-alias uins='sudo pacman -Rs --noconfirm'
+alias ins='pkg install -y'
+alias uins='pkg remove -t'
 
 alias ide='tmux split-window -v -p 20 ; tmux split-window -h -p 75 ; tmux last-pane ; nvim'
 # alias ide='tmux split-window -h -p 30 ; tmux split-window -v -p 75 ; tmux last-pane ; nvim'
@@ -298,7 +290,7 @@ gla () {
 }
 
 hi () {
-    rem
+    gla ; gha ; rem
 }
 
 rem () {
@@ -307,6 +299,7 @@ rem () {
     npm -g install npm
     sudo gem update neovim
     python -m pip install neovim
+    python -m pip install --upgrade pip
     tldr --update
 
     # debian base (ubuntu, kali,...)
@@ -321,4 +314,3 @@ rem () {
 # source /usr/share/fzf/key-bindings.zsh
 # source /usr/share/fzf/completion.zsh
 source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
