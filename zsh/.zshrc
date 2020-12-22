@@ -297,16 +297,15 @@ rem () {
     nvim -c "PlugUpdate | qa"
     npm -g install neovim
     npm -g install npm
-    sudo gem update neovim
+    gem update neovim
     python -m pip install neovim
     python -m pip install --upgrade pip
-    tldr --update
 
     # debian base (ubuntu, kali,...)
-    sudo apt update
-    sudo apt upgrade -y
-    sudo apt autoremove -y
-    sudo apt autoclean
+    apt update
+    apt upgrade -y
+    apt autoremove -y
+    apt autoclean
 
     cd ~ ; clear ; neofetch
 }
