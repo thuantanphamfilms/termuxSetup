@@ -62,7 +62,7 @@ mk () {
 }
 
 BMI () {
-    ~/.config/zsh/functions/BMI.py
+    bash ~/git/termuxSetup/zsh/functions/BMI.py
 }
 
 u () {
@@ -90,15 +90,15 @@ u () {
 }
 
 24-bit-color () {
-bash ~/.config/zsh/functions/24-bit-color.sh
+    bash ~/git/termuxSetup/zsh/functions/24-bit-color.sh
 }
 
 print256colours () {
-    bash ~/.config/zsh/functions/print256colours.sh
+    bash ~/git/termuxSetup/zsh/functions/print256colours.sh
 }
 
 showTrueColor () {
-    bash ~/.config/zsh/functions/showTrueColor.sh
+    bash ~/git/termuxSetup/zsh/functions/showTrueColor.sh
 }
 
 dl () {
@@ -204,16 +204,16 @@ export FZF_DEFAULT_COMMAND='fd -H --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # paper color
-# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-# --color=fg:#4d4d4c,bg:#eeeeee,hl:#d7005f
-# --color=fg+:#4d4d4c,bg+:#e8e8e8,hl+:#d7005f
-# --color=info:#4271ae,prompt:#8959a8,pointer:#d7005f
-# --color=marker:#4271ae,spinner:#4271ae,header:#4271ae'
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+--color=fg:#4d4d4c,bg:#eeeeee,hl:#d7005f
+--color=fg+:#4d4d4c,bg+:#e8e8e8,hl+:#d7005f
+--color=info:#4271ae,prompt:#8959a8,pointer:#d7005f
+--color=marker:#4271ae,spinner:#4271ae,header:#4271ae'
 
 # gruvbox dark
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
---color fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
---color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54'
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+# --color fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
+# --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54'
 
 c () {
     local dir
@@ -309,7 +309,3 @@ rem () {
 
     cd ~ ; clear ; neofetch
 }
-
-# source /usr/share/fzf/key-bindings.zsh
-# source /usr/share/fzf/completion.zsh
-source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
