@@ -1,6 +1,14 @@
 call plug#begin()
-Plug 'preservim/tagbar'
-nmap <leader>t :TagbarToggle<CR>
+Plug 'liuchengxu/vista.vim'
+nmap <leader>t :Vista!!<CR>
+
+Plug 'tpope/vim-repeat'
+silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
+
+" mapping jj to esc better way
+Plug 'jdhao/better-escape.vim'
+let g:better_escape_interval = 200
+let g:better_escape_shortcut = 'jj'
 
 Plug 'rhysd/clever-f.vim'
 Plug 'easymotion/vim-easymotion'
@@ -56,7 +64,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 set hidden
 set shortmess+=c
 set signcolumn=yes
-set updatetime=300
+set updatetime=100
 let g:coc_global_extensions = [
             \ "coc-css",
             \ "coc-html",
@@ -92,7 +100,7 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 Plug 'mbbill/undotree'
-set undodir=~/.config/nvim/undodir
+set undodir=~/git/ok/undodir
 set undofile
 nnoremap <leader>u :UndotreeShow<CR>
 
@@ -105,45 +113,35 @@ set ignorecase
 set incsearch
 set smartcase
 set magic
-
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+Plug 'mhinz/vim-signify'
 Plug 'mkitt/tabline.vim'
 Plug 'ntpeters/vim-better-whitespace'
 highlight ExtraWhitespace ctermbg=None
 
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
+Plug 'sheerun/vim-polyglot'
 
 Plug 'gregsexton/MatchTag', { 'for': 'html' }
-Plug 'sheerun/vim-polyglot' " highlight stuff
 Plug 'norcalli/nvim-colorizer.lua'
-
-" BUG: markdown file (fixed but not good enough)
-Plug 'Yggdroot/indentLine'
-let g:indentLine_char = '▏'
-let g:indentLine_bufTypeExclude = ['help', 'terminal', 'markdown', 'text']
-let g:indentLine_fileTypeExclude = ['help', 'text', 'markdown']
+autocmd BufRead,BufNewFile * :ColorizerAttachToBuffer
 
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sainnhe/gruvbox-material'
 call plug#end()
 
 syntax enable
-highlight WildMenu guifg=#87bb7c
+highlight WildMenu guifg=#78A79C
 set termguicolors
-set background=light
-" set background=dark
-colorscheme PaperColor
-" colorscheme gruvbox-material
+set background=dark
+colorscheme gruvbox-material
 
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)
 
-" set colorcolumn=80
 set cursorline
-" highlight CursorLine guibg=bold gui=bold
-highlight CursorLine term=bold cterm=bold
 
 set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
@@ -175,7 +173,6 @@ nnoremap - <C-x>
 vmap < <gv
 vmap > >gv
 
-imap jj <Esc>
 map <space> <leader>
 
 nmap <C-t> :tabnew<Return>
@@ -206,11 +203,12 @@ nnoremap <space>? :echo expand("%:p")<CR>
 nmap ss :split<Return><C-w>w
 nmap sv :vsplit<Return><C-w>w
 
-" Save A File Without Root Permission With sudo
+" write file when you forgot root
 command! W execute "w !sudo tee %"
 
 nmap <leader>a :call FloatTerm()<CR>
-nmap <leader>g :call FloatTerm("tig")<CR>
+nmap <leader>g :call FloatTerm('"tig"')<CR>
+nmap <leader>h :call FloatTerm('"htop"')<CR>
 function! FloatTerm(...)
     let height = float2nr((&lines - 2) * 0.6)
     let row = float2nr((&lines - height) / 2)
@@ -244,7 +242,7 @@ function! FloatTerm(...)
     let buf = nvim_create_buf(v:false, v:true)
     let s:float_term_win = nvim_open_win(buf, v:true, opts)
 
-    hi FloatWinBorder guifg=#87bb7c
+    hi FloatWinBorder guifg=#78A79C
     call setwinvar(s:float_term_border_win, '&winhl', 'Normal:FloatWinBorder')
     call setwinvar(s:float_term_win, '&winhl', 'Normal:Normal')
     if a:0 == 0
