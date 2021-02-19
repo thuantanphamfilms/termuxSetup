@@ -192,11 +192,7 @@ alias o='xdg-open'
 alias 777='chmod -R 777'
 alias x='chmod +x'
 alias f='fd . -H | grep --colour=always'
-alias colorPicker='zenity --color-selection'
-# debian
 alias cat='batcat'
-# arch
-# alias cat='bat'
 alias nnn='nnn -de'
 
 # music stuff
@@ -303,20 +299,6 @@ rem () {
     pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
     tldr --update
     gla
-
-    # arch base
-    # sudo pacman -Syu --noconfirm
-    # yay -Sua --noconfirm
-
-    # debian base (ubuntu, kali,...)
-    # sudo apt update
-    # sudo apt upgrade -y
-    # sudo apt autoremove -y
-    # sudo apt autoclean
-
-    # rehat base (fedora)
-    # sudo dnf update -y
-    # sudo dnf autoremove -y
 
     # termux
     pkg update
