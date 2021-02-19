@@ -1,5 +1,9 @@
 # termux setup
 
+## Demo (Vsmart live 4, android 10, light theme)
+
+![](./img/demoTermux.jpg =250x)
+
 ## Check list
 
 **Note: you should edit script for your custom**
