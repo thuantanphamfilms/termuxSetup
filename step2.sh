@@ -18,6 +18,7 @@ git clone https://github.com/thuanpham2311/termuxSetup
 # git clone git@github.com:thuanpham2311/theNewsTimes.git
 # git clone git@github.com:thuanpham2311/calculatorOnIOS.git
 # git clone git@github.com:thuanpham2311/ok.git
+# ln -sf ~/git/ok/.tinypng ~/.tinypng
 # git clone git@github.com:thuanpham2311/stuDarkTheme
 # git clone git@github.com:thuanpham2311/thuanpham2311.github.io.git
 
@@ -25,10 +26,14 @@ cd ~/git/termuxSetup/zsh/functions/
 git clone https://github.com/zsh-users/zsh-syntax-highlighting
 cd
 
+mkdir ~/backupDotfile
+mv ~/.config/nvim         ~/backupDotfile
+mv ~/.zshrc         ~/backupDotfile
+mv ~/.tmux.conf         ~/backupDotfile
+
 ln -sf ~/git/termuxSetup/.termux ~/
 ln -sf ~/git/termuxSetup/zsh/.zshrc ~/
 ln -sf ~/git/termuxSetup/tmux/.tmux.conf ~/.tmux.conf
-ln -sf ~/git/ok/.tinypng ~/.tinypng
 ln -sf ~/git/dotfiles/ssh/config ~/.ssh/config
 ln -sf ~/git/dotfiles/nvim ~/.config/
 ln -sf ~/git/dotfiles/bat/ ~/.config/
