@@ -40,19 +40,19 @@ autoload -Uz compinit
 compinit
 
 light () {
-    echo "source ~/git/dotfiles/zsh/functions/lightFzf.zsh" > ~/git/dotfiles/zsh/themeFzf.zsh
+    echo "source ~/git/termuxSetup/zsh/functions/lightFzf.zsh" > ~/git/termuxSetup/zsh/themeFzf.zsh
     echo "
 set background=light
-colorscheme PaperColor" > ~/git/dotfiles/nvim/darkOrLight.vim
-    echo "--theme=\"GitHub\"" > ~/git/dotfiles/bat/config
+colorscheme PaperColor" > ~/git/termuxSetup/nvim/darkOrLight.vim
+    echo "--theme=\"GitHub\"" > ~/git/termuxSetup/bat/config
 }
 
 dark () {
-    echo "source ~/git/dotfiles/zsh/functions/darkFzf.zsh" >  ~/git/dotfiles/zsh/themeFzf.zsh
+    echo "source ~/git/termuxSetup/zsh/functions/darkFzf.zsh" >  ~/git/termuxSetup/zsh/themeFzf.zsh
     echo "
 set background=dark
-colorscheme gruvbox-material" > ~/git/dotfiles/nvim/darkOrLight.vim
-    echo "--theme=\"OneHalfDark\"" > ~/git/dotfiles/bat/config
+colorscheme gruvbox-material" > ~/git/termuxSetup/nvim/darkOrLight.vim
+    echo "--theme=\"OneHalfDark\"" > ~/git/termuxSetup/bat/config
 }
 
 mk () {
@@ -67,11 +67,11 @@ mk () {
 }
 
 bmi () {
-    python3 ~/git/dotfiles/zsh/functions/bmi.py
+    python3 ~/git/termuxSetup/zsh/functions/bmi.py
 }
 
 tv () {
-    bash ~/git/dotfiles/zsh/functions/tv.sh
+    bash ~/git/termuxSetup/zsh/functions/tv.sh
 }
 
 u () {
@@ -99,15 +99,15 @@ u () {
 }
 
 24-bit-color () {
-    bash ~/git/dotfiles/zsh/functions/24-bit-color.sh
+    bash ~/git/termuxSetup/zsh/functions/24-bit-color.sh
 }
 
 print256colours () {
-    bash ~/git/dotfiles/zsh/functions/print256colours.sh
+    bash ~/git/termuxSetup/zsh/functions/print256colours.sh
 }
 
 showTrueColor () {
-    bash ~/git/dotfiles/zsh/functions/showTrueColor.sh
+    bash ~/git/termuxSetup/zsh/functions/showTrueColor.sh
 }
 
 dl () {
@@ -178,7 +178,7 @@ alias ll='clear ; exa -l --color=always --group-directories-first'
 alias lt='clear ; exa -aT --color=always --group-directories-first'
 
 alias cpf='xclip -sel clip'
-alias re='source ~/git/dotfiles/zsh/.zshrc ; tmux source-file ~/.tmux.conf'
+alias re='source ~/git/termuxSetup/zsh/.zshrc ; tmux source-file ~/.tmux.conf'
 alias h='htop'
 alias e='exit'
 alias :q='exit'
@@ -317,6 +317,7 @@ rem () {
     gem update neovim
     pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
     tldr --update
+    gla
 
     # arch base
     # sudo pacman -Syu --noconfirm
@@ -339,8 +340,8 @@ rem () {
     cd ~ ; clear ; neofetch
 }
 
-source ~/git/dotfiles/zsh/functions/key-bindings.zsh
-source ~/git/dotfiles/zsh/functions/completion.zsh
-source ~/git/dotfiles/zsh/themeFzf.zsh
-source ~/git/dotfiles/zsh/functions/zsh-autosuggestions.zsh
-source ~/git/dotfiles/zsh/functions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/git/termuxSetup/zsh/functions/key-bindings.zsh
+source ~/git/termuxSetup/zsh/functions/completion.zsh
+source ~/git/termuxSetup/zsh/themeFzf.zsh
+source ~/git/termuxSetup/zsh/functions/zsh-autosuggestions.zsh
+source ~/git/termuxSetup/zsh/functions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
