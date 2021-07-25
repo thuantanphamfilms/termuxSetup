@@ -43,5 +43,6 @@ ln -sf ~/git/dotfiles/nvim ~/.config/
 ln -sf ~/git/dotfiles/bat/ ~/.config/
 ln -sf ~/git/dotfiles/git/.gitconfig ~/.gitconfig
 ln -sf ~/git/dotfiles/.selected_editor ~/.selected_editor
+ln -sf ~/git/dotfiles/gtk.css ~/.config/gtk-3.0/
 
 cd
