@@ -1,0 +1,2 @@
+0 * * * * zsh ~/termuxSetup/zsh/functions/crontabHourly.zsh
+*/15 * * * * zsh ~/termuxSetup/zsh/functions/crontab15m.zsh

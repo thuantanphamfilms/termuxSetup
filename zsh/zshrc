@@ -1,0 +1,163 @@
+set -U EDITOR nvim
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PATH="$HOME/.npm/bin:$PATH"
+
+export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
+export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
+export PATH="$HOME/gems/bin:$PATH"
+export PATH="$PATH:/opt/mssql-tools/bin"
+export PATH=$PATH:~/.local/bin
+export GEM_HOME="$HOME/gems"
+
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' rehash true
+zstyle ':completion:*' accept-exact '*(N)'
+WORDCHARS=${WORDCHARS//\/[&.;]}
+
+autoload -U colors && colors
+eval "$(starship init zsh)"
+
+setopt histignorealldups sharehistory
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+
+bindkey -v
+
+function zle_keymap_select {
+if [[ ${KEYMAP} == vicmd ]] ||
+    [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+elif [[ ${KEYMAP} == main ]] ||
+    [[ ${KEYMAP} == viins ]] ||
+    [[ ${KEYMAP} = '' ]] ||
+    [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+fi
+}
+
+zle -N zle_keymap_select
+
+function zle_line_init() {
+    zle -K viins
+    echo -ne "\e[5 q"
+}
+
+zle -N zle_line_init
+
+echo -ne '\e[5 q'
+
+preexec() { echo -ne '\e[5 q' ;}
+
+autoload -Uz compinit
+compinit
+
+function download_file () {
+    cd ~/Downloads
+    aria2c $argv
+    ls -lah ~/Downloads
+    cd -
+}
+
+function create_cpp_project () {
+    mkdir $argv
+    cd $argv
+    cp -r ~/.config/nvim/stuff/cpppro/* .
+    nvim -O *
+}
+
+prettierCpp () { clang-format --style=Google -i $(find -name '*.h' && find -name '*.cpp') }
+
+function repeat_in_1s () {
+    while true
+    do
+        $argv
+        sleep 1
+    done
+}
+
+SERVER_IP () { hostname -I }
+
+se () { browser-sync start --server --files . --no-notify --host SERVER_IP --port 9000 }
+
+alias l='exa -al --color=always --group-directories-first --icons'
+alias ls='exa -al --color=always --group-directories-first --icons'
+alias sl='exa -al --color=always --group-directories-first --icons'
+alias la='exa -a --color=always --group-directories-first --icons'
+alias al='exa -a --color=always --group-directories-first --icons'
+alias l.='exa -a| egrep "^\."'
+alias ll='exa -l --color=always --group-directories-first --icons'
+alias lt='exa -aT --color=always --group-directories-first --icons'
+
+alias cpf='wl-copy'
+alias reload='source ~/.zshrc ; tmux source-file ~/.tmux.conf'
+alias h='htop'
+alias e='exit'
+alias :q='exit'
+alias q='exit'
+alias p='ipython3'
+alias rb='sudo reboot now'
+alias sd='sudo shutdown now'
+alias ka='killall'
+alias v='nvim'
+alias 777='chmod -R 777'
+alias x='chmod +x'
+alias color_picker='zenity --color-selection'
+alias cat='bat'
+export GREP_COLOR='1;31'
+alias grep='grep --color=auto'
+alias n='nnn -de'
+
+alias ins='pkg install -y'
+alias uins='pkg remove -y'
+
+alias ide='tmux split-window -v -p 20 ; tmux split-window -h -p 50 ; tmux last-pane ; nvim'
+# alias ide='tmux split-window -v -p 8 ; tmux last-pane ; nvim'
+# alias ide='tmux split-window -h -p 30 ; tmux split-window -v -p 75 ; tmux last-pane ; nvim'
+alias qa='tmux kill-session -a ; cowsay "All session deleted" ; tmux ls'
+
+alias ..='cd .. ; l'
+alias ...='cd .. ; cd .. ; l'
+alias dow='cd ~/Downloads ; l'
+
+alias yt='youtube-dl -f bestvideo+bestaudio'
+alias yta='youtube-dl -f "bestaudio" --continue --no-overwrites --ignore-errors --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s"'
+
+alias t='trash'
+alias tdl='trash ~/Downloads/*'
+
+function nvm() {
+    echo "🚨 NVM not loaded! Loading now..."
+    unset -f nvm
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    nvm "$@"
+}
+
+function update () {
+    nvim -c "PlugUpdate | qa"
+    nvim -c "CocUpdateSync | qa"
+    npm update -g
+    npm install -g npm
+    gem update neovim
+    tldr --update
+    gh extension upgrade --all
+    ~/.tmux/plugins/tpm/bin/update_plugins all
+
+    pkg upgrade -y
+}
+
+function hi () {
+    update
+    neofetch
+}
+
+source ~/termuxSetup/zsh/functions/theme_control.zsh
+source ~/termuxSetup/zsh/functions/git_config.zsh
+source ~/termuxSetup/zsh/functions/completion.zsh
+source ~/termuxSetup/zsh/functions/fzf_config.zsh
+source ~/termuxSetup/zsh/functions/fzf-key-bindings.zsh
+source ~/termuxSetup/zsh/functions/zsh-autosuggestions.zsh
+source ~/termuxSetup/zsh/functions/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
