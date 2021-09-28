@@ -1,12 +1,12 @@
-let g:zettelkasten = "~/storage/shared/note/"
+let g:zettelkasten = "~/sync/note/"
 
 command! ZettelHome :execute ":e" zettelkasten . "README.md"
 
-noremap <leader>ww :ZettelHome<cr>
+noremap gn :ZettelHome<enter>:cd %:h<enter>
 
 command! NewZettel :execute ":e" zettelkasten . strftime("%Y%m%d%H%M%S") . ".md"
 
-noremap <leader>n :NewZettel<cr>
+noremap <leader>n :NewZettel<enter>
 
 function! s:make_note_link(l)
     let line = split(a:l[0], ':')

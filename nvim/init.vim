@@ -20,19 +20,23 @@ let g:coc_snippet_prev = '<S-TAB>'
 noremap <silent> [g <Plug>(coc-diagnostic-prev)
 noremap <silent> ]g <Plug>(coc-diagnostic-next)
 
+noremap <silent> <Leader>: :CocCommand<enter>
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 Plug 'junegunn/fzf.vim'
 
 inoremap <expr> <c-f><c-w> fzf#vim#complete#word()
-noremap <leader>f :Files<cr>
-noremap <leader>F :Files ~<CR>
-noremap <leader>k :Buffers<CR>
-noremap <leader>j :Rg<CR>
-noremap <leader>h :History<CR>
-noremap <c-p> :Commands<CR>
-noremap // :BLines<CR>
-noremap gc :cd %:h <CR>:BCommits<CR>
+noremap <leader>f :Files<enter>
+noremap <leader>F :Files ~<enter>
+noremap <leader>k :Buffers<enter>
+noremap <leader>j :Rg<enter>
+noremap <leader>h :History<enter>
+noremap ; :Commands<enter>
+noremap // :BLines<enter>
+noremap gc :cd %:h <enter>:BCommits<enter>
 
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
@@ -52,9 +56,11 @@ let g:fzf_colors =
             \ 'header':  ['fg', 'Comment'] }
 
 Plug 'tpope/vim-fugitive'
-noremap gs :G<CR>
-noremap gl :Gclog<CR>
-noremap gp :G push<CR>
+noremap gs :G<enter>
+noremap gl :Gclog<enter>
+noremap gp :G push<enter>
+
+Plug 'tpope/vim-eunuch'
 
 Plug 'kevinhwang91/vim-ibus-sw'
 
@@ -71,26 +77,17 @@ let g:mkdp_markdown_css = '~/.config/nvim/stuff/github-markdown.css'
 
 Plug 'ferrine/md-img-paste.vim'
 let g:mdip_imgdir = '.'
-autocmd FileType markdown noremap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+autocmd FileType markdown noremap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<enter>
 
 Plug 'phaazon/hop.nvim'
-map f :HopChar1<CR>
-noremap f :HopChar1<CR>
-
-Plug 'kyazdani42/nvim-web-devicons'
-
-Plug 'kyazdani42/nvim-tree.lua'
-
-let g:nvim_tree_side = 'right'
-let g:nvim_tree_follow = 1
-let g:nvim_tree_special_files = [ 'README.md', 'Makefile', 'MAKEFILE' ]
-nnoremap <leader>t :NvimTreeToggle<CR>
+map f :HopChar1<enter>
+noremap f :HopChar1<enter>
 
 Plug 'wellle/tmux-complete.vim'
 
 Plug 'jdhao/better-escape.vim'
 let g:better_escape_interval = 200
-let g:better_escape_shortcut = 'jj'
+let g:better_escape_shortcut = ['jk', 'jj', 'kj', 'kk']
 
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key=','
@@ -108,9 +105,9 @@ let g:NERDSpaceDelims = 1
 map mm <Plug>NERDCommenterToggle
 
 Plug 'mbbill/undotree'
-set undodir=~/syns/ok/undodir
+set undodir=~/sync/ok/undodir
 set undofile
-nnoremap <leader>u :UndotreeToggle<CR>
+nnoremap <leader>u :UndotreeToggle<enter>
 let g:undotree_WindowLayout = 3
 
 Plug 'romainl/vim-cool'
@@ -137,8 +134,6 @@ let g:indent_blankline_filetype_exclude = [
             \]
 
 Plug 'mhinz/vim-signify'
-
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'mcchrish/zenbones.nvim'
 
@@ -208,7 +203,7 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 
-noremap <space>s :setlocal spell! spell?<CR>
+noremap <space>s :setlocal spell! spell?<enter>
 
 command! Reload execute "source ~/.config/nvim/init.vim"
 
@@ -220,10 +215,8 @@ map <silent> <Down> <C-W>-
 map <silent> <Up> <C-W>+
 map <silent> <Left> <C-w>>
 
-noremap cd. :cd %:h<CR>
-noremap cd :cd<CR>
-
-command! W execute "w !sudo tee %"
+noremap cd. :cd %:h<enter>
+noremap cd :cd<enter>
 
 noremap Y y$
 
@@ -233,8 +226,8 @@ inoremap ! !<c-g>u
 inoremap ? ?<c-g>u
 inoremap [ [<c-g>u
 
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+vnoremap J :m '>+1<enter>gv=gv
+vnoremap K :m '<-2<enter>gv=gv
 
 nnoremap j gj
 nnoremap k gk
@@ -243,6 +236,8 @@ vnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
-noremap <leader>gf :e <cfile><cr>
+noremap gx :silent execute "!xdg-open " . "<cfile>"<enter>
 
-noremap gx :silent execute "!xdg-open " . "<cfile>"<CR>
+nnoremap <leader>q :q<enter>
+nnoremap Q :qa!<enter>
+nnoremap <leader>w :w<enter>

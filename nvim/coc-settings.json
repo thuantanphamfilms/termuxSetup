@@ -1,5 +1,5 @@
 {
-  "snippets.userSnippetsDirectory": "~/termuxSetup/nvim/snips",
+  "snippets.userSnippetsDirectory": "~/dotfiles/nvim/snips",
   "coc.preferences.useQuickfixForLocations": true,
   "diagnostic.warningSign": "",
   "diagnostic.errorSign": "",
