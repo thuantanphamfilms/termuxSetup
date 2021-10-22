@@ -2,25 +2,55 @@ call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 set hidden
 set shortmess+=c
-set signcolumn=auto
+set signcolumn=yes
 set updatetime=100
 let g:coc_global_extensions = [
             \ "coc-snippets",
             \ "coc-css",
+            \ "coc-diagnostic",
+            \ "coc-prettier",
+            \ "coc-dot-complete",
+            \ "coc-dash-complete",
+            \ "coc-deno",
+            \ "coc-sh",
+            \ "coc-go",
+            \ "coc-eslint",
+            \ "coc-omnisharp",
             \ "coc-html",
+            \ "coc-htmlhint",
+            \ "coc-html-css-support",
             \ "coc-emmet",
             \ "coc-sql",
             \ "coc-clangd",
             \ "coc-tsserver",]
 
-inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
-let g:coc_snippet_next = '<TAB>'
-let g:coc_snippet_prev = '<S-TAB>'
+imap <C-l> <Plug>(coc-snippets-expand)
+vmap <C-j> <Plug>(coc-snippets-select)
+let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_prev = '<c-k>'
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+xmap <leader>x  <Plug>(coc-convert-snippet)
 
-noremap <silent> [g <Plug>(coc-diagnostic-prev)
-noremap <silent> ]g <Plug>(coc-diagnostic-next)
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-noremap <silent> <Leader>: :CocCommand<enter>
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+nmap <silent> ]d :call CocAction('diagnosticNext')<cr>
+nmap <silent> [d :call CocAction('diagnosticPrevious')<cr>
+
+noremap <silent> <Leader>; :CocCommand<enter>
+
+Plug 'djoshea/vim-autoread'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -73,7 +103,6 @@ let g:bullets_enabled_file_types = [
             \]
 
 Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'}
-let g:mkdp_markdown_css = '~/.config/nvim/stuff/github-markdown.css'
 
 Plug 'ferrine/md-img-paste.vim'
 let g:mdip_imgdir = '.'
@@ -92,13 +121,18 @@ let g:better_escape_shortcut = ['jk', 'jj', 'kj', 'kk']
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key=','
 let g:user_emmet_install_global = 0
-autocmd FileType html,css,markdown EmmetInstall
+autocmd FileType xhtml,html,css,markdown EmmetInstall
+
+Plug 'AndrewRadev/tagalong.vim'
+let g:tagalong_filetypes = ['eco', 'eelixir', 'ejs', 'eruby', 'html', 'xhtml', 'htmldjango', 'javascriptreact', 'jsx', 'php', 'typescriptreact', 'xml']
+
+Plug 'leafOfTree/vim-matchtag'
 
 Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'tpope/vim-surround'
 
-Plug 'windwp/nvim-autopairs'
+Plug 'jiangmiao/auto-pairs'
 
 Plug 'preservim/nerdcommenter'
 let g:NERDSpaceDelims = 1
@@ -119,6 +153,8 @@ set smartcase
 set magic
 nnoremap n nzzzv
 nnoremap N Nzzzv
+nnoremap * *zz
+nnoremap # #zz
 noremap J mzJ`z
 
 Plug 'norcalli/nvim-colorizer.lua'
@@ -133,7 +169,11 @@ let g:indent_blankline_filetype_exclude = [
             \ 'help', 'yaml'
             \]
 
-Plug 'mhinz/vim-signify'
+Plug 'nvim-lua/plenary.nvim'
+
+Plug 'lewis6991/gitsigns.nvim'
+
+Plug 'rktjmp/lush.nvim'
 
 Plug 'mcchrish/zenbones.nvim'
 
@@ -157,9 +197,7 @@ set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
 
 set tabstop=4 softtabstop=4 noet
 set shiftwidth=4
-autocmd BufRead,BufNewFile *.scss,*.css,*.html,*.md setlocal tabstop=2
-	    \ shiftwidth=2
-	    \ softtabstop=2
+autocmd BufRead,BufNewFile *.cs,*.h,*.cpp,*.scss,*.css,*.html,*.md setlocal tabstop=2 shiftwidth=2 softtabstop=2
 set expandtab
 
 set number relativenumber
@@ -178,6 +216,7 @@ set nobackup
 set noswapfile
 set lazyredraw
 set nowritebackup
+
 set inccommand=split
 set scrolloff=5
 
@@ -204,6 +243,8 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 
 noremap <space>s :setlocal spell! spell?<enter>
+
+set spelllang=en_us,vi
 
 command! Reload execute "source ~/.config/nvim/init.vim"
 
@@ -238,6 +279,25 @@ nnoremap gk k
 
 noremap gx :silent execute "!xdg-open " . "<cfile>"<enter>
 
-nnoremap <leader>q :q<enter>
-nnoremap Q :qa!<enter>
 nnoremap <leader>w :w<enter>
+nnoremap <leader>q :q<enter>
+nnoremap <leader>o :wq<enter>
+nnoremap Q :qa!<enter>
+
+noremap H :cp<enter>
+noremap L :cn<enter>
+
+function! TwiddleCase(str)
+    if a:str ==# toupper(a:str)
+        let result = tolower(a:str)
+    elseif a:str ==# tolower(a:str)
+        let result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
+    else
+        let result = toupper(a:str)
+    endif
+    return result
+endfunction
+vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
+
+command! OpenFileInDefaultApp execute "!xdg-open '%'"
+command! OpenFileInBraveBrowser execute "!brave-browser '%'"
